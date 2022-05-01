@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { useAppDispatch, useAppSelector } from './customHooks/redux';
+import useGeoLocation from './customHooks/useGeoLocation';
+import { useGetByCityNameQuery } from './store/reducers/openWeatherApi';
 import { userSlice } from './store/reducers/UserSlice';
-// import useUserLocation from './customHooks/useUserLocation';
 
 // 1. Реализовать получение города по IP адресу и ввод города в search. Done!
 // 2. Подключить и настроить редакс. Done!
@@ -10,14 +11,15 @@ import { userSlice } from './store/reducers/UserSlice';
 
 // const UNSPLASH_ACCESS_KEY = 'DON2j_WwiFgfpZpAs8GcG5MrGG1E9ZcVcjhJW-5yaf8';
 
-// const SG_WEATHER_API_KEY =
-//   '6c733a8a-bbfc-11ec-9d13-0242ac130002-6c733b0c-bbfc-11ec-9d13-0242ac130002';
+// const WEATHER_BIT_API_KEY =
+//   '70c100dd35234454816afc7edc843093';
 
 function App() {
-  const { city } = useAppSelector((state) => state.userReducer);
-  const { changeCity } = userSlice.actions;
+  useGeoLocation();
+  const { city, userCity, requestCity } = useAppSelector((state) => state.userReducer);
+  const { data } = useGetByCityNameQuery(requestCity);
+  const { changeCity, changeRequestCity } = userSlice.actions;
   const dispatch = useAppDispatch();
-  // useUserLocation();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     dispatch(changeCity(e.target.value));
@@ -25,13 +27,17 @@ function App() {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    console.log('handleSubmit');
-    // if (city.length) {
-    //   localStorage.setItem('City', city);
-    //   cityName.current = city;
-    //   setNewRequest(!newRequest);
-    // }
+    dispatch(changeRequestCity(city));
   };
+
+  useEffect(() => {
+    if (!requestCity) {
+      dispatch(changeRequestCity(userCity));
+      dispatch(changeCity(userCity));
+    }
+    console.log('app');
+    console.log('data', data);
+  }, [changeCity, changeRequestCity, data, dispatch, requestCity, userCity]);
 
   return (
     <div>

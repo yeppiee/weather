@@ -1,15 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from './redux';
+import { userSlice } from '../store/reducers/UserSlice';
+import { useGetByGeoLocationQuery } from '../store/reducers/openWeatherApi';
 
 const useGeoLocation = () => {
-  const [location, setLocation] = useState({ lat: 0, lon: 0, isLoad: false });
-
+  const { userGeoLocation } = useAppSelector((state) => state.userReducer);
+  const { data } = useGetByGeoLocationQuery(userGeoLocation);
+  const { getUserGeoLocation, changeUserCity } = userSlice.actions;
+  const dispatch = useAppDispatch();
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      setLocation({ lat: position.coords.latitude, lon: position.coords.longitude, isLoad: true });
+      if (data) {
+        dispatch(changeUserCity(data.name));
+      }
+      dispatch(getUserGeoLocation({
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      }));
     });
-  }, []);
-
-  return location.isLoad ? location : null;
+  }, [changeUserCity, data, dispatch, getUserGeoLocation]);
 };
 
 export default useGeoLocation;

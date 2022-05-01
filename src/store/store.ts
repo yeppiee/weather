@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { openWeatherApi } from './reducers/openWeatherApi';
 import userReducer from './reducers/UserSlice';
 
 const persistConfig = {
@@ -19,6 +20,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   userReducer,
+  [openWeatherApi.reducerPath]: openWeatherApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -29,7 +31,7 @@ export const store = configureStore({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }),
+  }).concat(openWeatherApi.middleware),
 });
 
 export const persistor = persistStore(store);
