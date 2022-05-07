@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { useAppDispatch, useAppSelector } from './customHooks/redux';
 import useGeoLocation from './customHooks/useGeoLocation';
-import { useGetByCityNameQuery } from './store/reducers/openWeatherApi';
+import { useGetByCityNameQuery, useGetWeatherByGeoLocationQuery } from './store/reducers/openWeatherApi';
 import { userSlice } from './store/reducers/UserSlice';
 
 // 1. Реализовать получение города по IP адресу и ввод города в search. Done!
@@ -16,9 +16,12 @@ import { userSlice } from './store/reducers/UserSlice';
 
 function App() {
   useGeoLocation();
-  const { city, userCity, requestCity } = useAppSelector((state) => state.userReducer);
-  const { data } = useGetByCityNameQuery(requestCity);
-  const { changeCity, changeRequestCity } = userSlice.actions;
+  const {
+    city, requestCity, cityGeoLocation, userCity,
+  } = useAppSelector((state) => state.userReducer);
+  const { data: cityInfo, isLoading } = useGetByCityNameQuery(requestCity);
+  const { data: weather } = useGetWeatherByGeoLocationQuery(cityGeoLocation);
+  const { changeCity, changeRequestCity, getCityGeoLocation } = userSlice.actions;
   const dispatch = useAppDispatch();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -31,14 +34,20 @@ function App() {
   };
 
   useEffect(() => {
+    console.log('app');
     if (!requestCity) {
       dispatch(changeRequestCity(userCity));
       dispatch(changeCity(userCity));
+    } else {
+      dispatch(changeCity(requestCity));
     }
-    console.log('app');
-    console.log('data', data);
-  }, [changeCity, changeRequestCity, data, dispatch, requestCity, userCity]);
+    if (cityInfo) dispatch(getCityGeoLocation(cityInfo.coord));
+  }, [
+    changeCity, changeRequestCity, cityInfo, dispatch, getCityGeoLocation, requestCity, userCity,
+  ]);
+  console.log('weather', weather);
 
+  if (isLoading) return <div>Loading...</div>;
   return (
     <div>
       Hello Weather App

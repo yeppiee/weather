@@ -6,6 +6,10 @@ export const userSlice = createSlice({
   initialState: {
     city: '',
     requestCity: '',
+    cityGeoLocation: {
+      lat: 0,
+      lon: 0,
+    },
     userGeoLocation: {
       lat: 0,
       lon: 0,
@@ -21,6 +25,9 @@ export const userSlice = createSlice({
     },
     changeUserCity(state, action: PayloadAction<string>) {
       state.userCity = action.payload;
+    },
+    getCityGeoLocation(state, action: PayloadAction<UserGeoLocation>) {
+      state.cityGeoLocation = action.payload;
     },
     getUserGeoLocation(state, action: PayloadAction<UserGeoLocation>) {
       state.userGeoLocation = action.payload;
