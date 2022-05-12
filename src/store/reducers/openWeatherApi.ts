@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { UserGeoLocation } from '../../types/User';
-import { OpenWeatherData, OpenWeatherGeoResponse } from '../../types/Weather';
+import { OpenWeatherData, OpenWeatherGeoResponse } from '../../types/OpenWeather';
 
 const OPEN_WEATHER_API_KEY = '4d466002d1f5611fd08f865f84a5f135';
 const BASE_OPEN_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/';
