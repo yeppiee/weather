@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './redux';
 import { userSlice } from '../store/reducers/UserSlice';
-import { useGetCityByGeoLocationQuery } from '../store/reducers/openWeatherApi';
+import { useGetCityByGeoLocationQuery } from '../store/reducers/OpenWeatherApi';
 
 const useGeoLocation = () => {
   const { userGeoLocation } = useAppSelector((state) => state.userReducer);

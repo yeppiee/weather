@@ -6,6 +6,8 @@ export const userSlice = createSlice({
   initialState: {
     city: '',
     requestCity: '',
+    userCity: '',
+    imgNum: 0,
     cityGeoLocation: {
       lat: 0,
       lon: 0,
@@ -14,11 +16,13 @@ export const userSlice = createSlice({
       lat: 0,
       lon: 0,
     },
-    userCity: '',
   },
   reducers: {
     changeCity(state, action: PayloadAction<string>) {
       state.city = action.payload;
+    },
+    changeImgNum(state, action: PayloadAction<number>) {
+      state.imgNum = action.payload;
     },
     changeRequestCity(state, action: PayloadAction<string>) {
       state.requestCity = action.payload;

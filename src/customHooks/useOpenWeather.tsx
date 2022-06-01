@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useGetByCityNameQuery, useGetWeatherByGeoLocationQuery } from '../store/reducers/openWeatherApi';
+import { useGetByCityNameQuery, useGetWeatherByGeoLocationQuery } from '../store/reducers/OpenWeatherApi';
 import { userSlice } from '../store/reducers/UserSlice';
 import { useAppDispatch, useAppSelector } from './redux';
 
