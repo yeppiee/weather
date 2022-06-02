@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { openWeatherApi } from './reducers/OpenWeatherApi';
 import { unsplashApi } from './reducers/UnsplashAPI';
-import userReducer from './reducers/UserSlice';
+import userSlice from './reducers/UserSlice';
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +20,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  userReducer,
+  userSlice,
   [openWeatherApi.reducerPath]: openWeatherApi.reducer,
   [unsplashApi.reducerPath]: unsplashApi.reducer,
 });

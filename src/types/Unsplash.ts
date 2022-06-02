@@ -5,3 +5,7 @@ export type Url = {
 }
 
 export type Results = Array<Url>;
+
+export type UnsplashProps = {
+  images: Results;
+};

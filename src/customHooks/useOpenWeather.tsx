@@ -4,7 +4,7 @@ import { userSlice } from '../store/reducers/UserSlice';
 import { useAppDispatch, useAppSelector } from './redux';
 
 function useOpenWeather() {
-  const { requestCity, cityGeoLocation, userCity } = useAppSelector((state) => state.userReducer);
+  const { requestCity, cityGeoLocation, userCity } = useAppSelector((state) => state.userSlice);
   const { data: cityInfo } = useGetByCityNameQuery(requestCity);
   const { data: openWeather, isLoading } = useGetWeatherByGeoLocationQuery(cityGeoLocation);
   const { changeCity, changeRequestCity, getCityGeoLocation } = userSlice.actions;

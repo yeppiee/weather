@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { getDate, getTime } from '../services/utils';
+import styles from './Timer.module.css';
+import { getAMPM, getDate, getTime } from '../../services/utils';
 
 function Timer() {
   const [date, setDate] = useState(new Date());
@@ -11,7 +12,8 @@ function Timer() {
 
   return (
     <div>
-      {getTime(date)}
+      <span className={styles.time}>{getTime(date)}</span>
+      <span>{getAMPM(date)}</span>
       <div>
         {getDate(date)}
       </div>

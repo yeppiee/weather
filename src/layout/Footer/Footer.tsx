@@ -8,7 +8,7 @@ type FooterProps = {
 function Footer({ weather }: FooterProps) {
   return (
     <footer>
-      <img src={`http://openweathermap.org/img/wn/${weather?.current.weather[0].icon}@2x.png`} alt="weather-icon" />
+      <img src={`http://openweathermap.org/img/wn/${weather?.daily[0].weather[0].icon}@2x.png`} alt="weather-icon" />
     </footer>
   );
 }

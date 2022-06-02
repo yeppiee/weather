@@ -4,7 +4,7 @@ import { userSlice } from '../store/reducers/UserSlice';
 import { useGetCityByGeoLocationQuery } from '../store/reducers/OpenWeatherApi';
 
 const useGeoLocation = () => {
-  const { userGeoLocation } = useAppSelector((state) => state.userReducer);
+  const { userGeoLocation } = useAppSelector((state) => state.userSlice);
   const { data } = useGetCityByGeoLocationQuery(userGeoLocation);
   const { getUserGeoLocation, changeUserCity } = userSlice.actions;
   const dispatch = useAppDispatch();
