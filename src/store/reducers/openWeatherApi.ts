@@ -16,11 +16,11 @@ export const openWeatherApi = createApi({
       query: ({ lat, lon }) => `onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${OPEN_WEATHER_API_KEY}`,
     }),
     getByCityName: builder.query<OpenWeatherData, string>({
-      query: (city) => `weather?q=${city.toLowerCase() || 'minsk'}&appid=${OPEN_WEATHER_API_KEY}`,
+      query: (city) => `weather?q=${city.toLowerCase()}&appid=${OPEN_WEATHER_API_KEY}`,
     }),
   }),
 });
 
 export const {
-  useGetCityByGeoLocationQuery, useGetByCityNameQuery, useGetWeatherByGeoLocationQuery,
+  useLazyGetCityByGeoLocationQuery, useGetByCityNameQuery, useGetWeatherByGeoLocationQuery,
 } = openWeatherApi;

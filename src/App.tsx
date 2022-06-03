@@ -12,11 +12,14 @@ import useImg from './customHooks/useImg';
 
 function App() {
   useGeoLocation();
-  const { openWeather, isLoading } = useOpenWeather();
-  const { data: images } = useGetImgQuery(openWeather?.daily[0].weather[0].main);
+  const { openWeather } = useOpenWeather();
+  const { data: images } = useGetImgQuery(
+    openWeather?.current.weather[0].main,
+    { skip: !!openWeather === false },
+  );
   useImg(images);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (!images) return <div>Loading...</div>;
   return (
     <div className={styles.container}>
       <Header images={images.results} />

@@ -1,12 +1,18 @@
 import { useEffect } from 'react';
-import { useGetByCityNameQuery, useGetWeatherByGeoLocationQuery } from '../store/reducers/OpenWeatherApi';
+import {
+  useGetByCityNameQuery,
+  useGetWeatherByGeoLocationQuery,
+} from '../store/reducers/OpenWeatherApi';
 import { userSlice } from '../store/reducers/UserSlice';
 import { useAppDispatch, useAppSelector } from './redux';
 
 function useOpenWeather() {
-  const { requestCity, cityGeoLocation, userCity } = useAppSelector((state) => state.userSlice);
-  const { data: cityInfo } = useGetByCityNameQuery(requestCity);
-  const { data: openWeather, isLoading } = useGetWeatherByGeoLocationQuery(cityGeoLocation);
+  const { requestCity, userCity, cityGeoLocation } = useAppSelector((state) => state.userSlice);
+  const { data: cityInfo } = useGetByCityNameQuery(requestCity, { skip: !!requestCity === false });
+  const { data: openWeather } = useGetWeatherByGeoLocationQuery(
+    cityGeoLocation,
+    { skip: cityGeoLocation.lat === 0 && cityGeoLocation.lon === 0 },
+  );
   const { changeCity, changeRequestCity, getCityGeoLocation } = userSlice.actions;
   const dispatch = useAppDispatch();
 
@@ -25,10 +31,9 @@ function useOpenWeather() {
     dispatch,
     getCityGeoLocation,
     requestCity,
-    userCity,
-  ]);
+    userCity]);
 
-  return { openWeather, isLoading };
+  return { openWeather };
 }
 
 export default useOpenWeather;
