@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 25%;
+  background-color: rgba(170, 170, 170, 0.7);
+  padding: 0 4rem;
+}
+
+.current {
+  display: flex;
+  align-items: center;
+  padding-left: 4rem;
+}
+
+.currentInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.today {
+  text-transform: uppercase;
+}
+
+.ul {
+  display: flex;
+}
+
+.li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  padding: 0 4rem;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+}

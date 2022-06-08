@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import { openWeatherApi } from './reducers/OpenWeatherApi';
 import { unsplashApi } from './reducers/UnsplashAPI';
 import userSlice from './reducers/UserSlice';
+import { weatherBitApi } from './reducers/WeatherBitApi';
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +23,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   userSlice,
   [openWeatherApi.reducerPath]: openWeatherApi.reducer,
+  [weatherBitApi.reducerPath]: weatherBitApi.reducer,
   [unsplashApi.reducerPath]: unsplashApi.reducer,
 });
 
@@ -33,7 +35,10 @@ export const store = configureStore({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }).concat(openWeatherApi.middleware).concat(unsplashApi.middleware),
+  })
+    .concat(openWeatherApi.middleware)
+    .concat(weatherBitApi.middleware)
+    .concat(unsplashApi.middleware),
 });
 
 export const persistor = persistStore(store);

@@ -8,6 +8,8 @@ export const userSlice = createSlice({
     requestCity: '',
     userCity: '',
     imgNum: 0,
+    freezeDate: 0,
+    api: 'OpenWeather',
     cityGeoLocation: {
       lat: 0,
       lon: 0,
@@ -20,6 +22,9 @@ export const userSlice = createSlice({
   reducers: {
     changeCity(state, action: PayloadAction<string>) {
       state.city = action.payload;
+    },
+    changeApi(state, action: PayloadAction<string>) {
+      state.api = action.payload;
     },
     changeImgNum(state, action: PayloadAction<number>) {
       state.imgNum = action.payload;
@@ -35,6 +40,9 @@ export const userSlice = createSlice({
     },
     getUserGeoLocation(state, action: PayloadAction<UserGeoLocation>) {
       state.userGeoLocation = action.payload;
+    },
+    getFreezeDate(state, action: PayloadAction<number>) {
+      state.freezeDate = action.payload;
     },
   },
 });

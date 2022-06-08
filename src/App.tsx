@@ -1,21 +1,21 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import styles from './App.module.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from './layout/Footer';
 import Header from './layout/Header';
 import Main from './layout/Main';
 import useGeoLocation from './customHooks/useGeoLocation';
-import useOpenWeather from './customHooks/useOpenWeather';
+import useWeather from './customHooks/useWeather';
 import { useGetImgQuery } from './store/reducers/UnsplashAPI';
 import useImg from './customHooks/useImg';
 
-// const WEATHER_BIT_API_KEY = '70c100dd35234454816afc7edc843093';
-
 function App() {
   useGeoLocation();
-  const { openWeather } = useOpenWeather();
+  const weatherData = useWeather();
   const { data: images } = useGetImgQuery(
-    openWeather?.current.weather[0].main,
-    { skip: !!openWeather === false },
+    weatherData?.today.description,
+    { refetchOnMountOrArgChange: true, skip: !!weatherData === false },
   );
   useImg(images);
 
@@ -24,7 +24,18 @@ function App() {
     <div className={styles.container}>
       <Header images={images.results} />
       <Main />
-      <Footer weather={openWeather} />
+      <Footer weather={weatherData} />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

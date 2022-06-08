@@ -12,7 +12,14 @@ type Props = {
 const useImg = (images: Props) => {
   const { imgNum } = useAppSelector((state) => state.userSlice);
   const imgUrls = useMemo(() => {
-    if (images) return getImgUrl(images.results);
+    if (images) {
+      const urls = getImgUrl(images.results);
+      urls.forEach((url) => {
+        const img = new Image();
+        img.src = url;
+      });
+      return urls;
+    }
     return [];
   }, [images]);
 

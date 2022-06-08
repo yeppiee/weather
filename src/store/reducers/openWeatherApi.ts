@@ -13,7 +13,7 @@ export const openWeatherApi = createApi({
       query: ({ lat, lon }) => `weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}`,
     }),
     getWeatherByGeoLocation: builder.query<OpenWeatherGeoResponse, UserGeoLocation>({
-      query: ({ lat, lon }) => `onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${OPEN_WEATHER_API_KEY}`,
+      query: ({ lat, lon }) => `onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
     }),
     getByCityName: builder.query<OpenWeatherData, string>({
       query: (city) => `weather?q=${city.toLowerCase()}&appid=${OPEN_WEATHER_API_KEY}`,

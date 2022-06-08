@@ -67,9 +67,33 @@ type CurrentWeather = {
   wind_speed: number
 }
 
+type DailyWeather = {
+  clouds: number,
+  dew_point: number,
+  dt: number,
+  feels_like: number,
+  humidity: number,
+  pressure: number,
+  sunrise: number,
+  sunset: number,
+  temp: {
+    day: number
+    eve: number
+    max: number
+    min: number
+    morn: number
+    night: number
+  },
+  uvi: number,
+  visibility: number,
+  weather: Weather[],
+  wind_deg: number,
+  wind_speed: number
+}
+
 export type OpenWeatherGeoResponse = {
   current: CurrentWeather,
-  daily: CurrentWeather[],
+  daily: DailyWeather[],
   lat: number,
   lon: number,
   timezone: string,
