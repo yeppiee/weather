@@ -11,23 +11,35 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  column-gap: 10px;
 }
 
 .date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: tomato;
   border-radius: 20px;
   padding: 6px;
   font-size: 0.7em;
   transition: 0.3s ease-in;
+  height: 32px;
+  min-width: 100px;
 }
 .date:hover + .name {
   color: orange;
 }
 
 .name {
-  padding-left: 10px;
   transition: 0.3s ease-in;
 }
 .name:hover {
   color: orange;
+}
+
+@media (max-width: 768px) {
+  .date {
+    height: 28px;
+    min-width: 80px;
+  }
 }

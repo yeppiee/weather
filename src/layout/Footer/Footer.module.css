@@ -10,7 +10,8 @@
 .current {
   display: flex;
   align-items: center;
-  padding-left: 4rem;
+  justify-content: center;
+  min-width: 300px;
 }
 
 .currentInfo {
@@ -25,6 +26,8 @@
 
 .ul {
   display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .li {
@@ -32,10 +35,50 @@
   flex-direction: column;
   align-items: center;
   list-style: none;
-  padding: 0 4rem;
 }
 
 .img {
   width: 100px;
   height: 100px;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    font-size: 0.8em;
+    padding: 0 2rem;
+  }
+  .current {
+    min-width: 200px;
+  }
+  .img {
+    width: 75px;
+    height: 75px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    column-gap: 30px;
+    padding: 0 1rem;
+  }
+  .current {
+    min-width: 0;
+  }
+  .ul {
+    overflow-x: auto;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 550px) {
+  .current {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 450px) {
+  .img {
+    width: 50px;
+    height: 50px;
+  }
 }

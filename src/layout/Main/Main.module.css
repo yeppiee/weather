@@ -4,3 +4,23 @@
   flex: 1 1 auto;
   padding: 4rem;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .container {
+    justify-content: start;
+    flex-direction: column-reverse;
+    row-gap: 20px;
+  }
+}
