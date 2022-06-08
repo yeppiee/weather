@@ -23,14 +23,17 @@ function CalendarList() {
   const { holidays } = response;
 
   return (
-    <ul className={styles.ul}>
-      {holidays.length && holidays.map((holiday) => (
-        <li key={holiday.date.iso} className={styles.li}>
-          <span className={styles.date}>{holiday.date.iso.slice(0, 10)}</span>
-          <span className={styles.name}>{holiday.name}</span>
-        </li>
-      ))}
-    </ul>
+    holidays.length ? (
+      <ul className={styles.ul}>
+        {holidays.map((holiday) => (
+          <li key={holiday.date.iso} className={styles.li}>
+            <span className={styles.date}>{holiday.date.iso.slice(0, 10)}</span>
+            <span className={styles.name}>{holiday.name}</span>
+          </li>
+        ))}
+      </ul>
+    ) : <div>There are no holidays in this month</div>
+
   );
 }
 
