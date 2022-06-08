@@ -9,6 +9,7 @@ export const userSlice = createSlice({
     userCity: '',
     imgNum: 0,
     freezeDate: 0,
+    dateObject: new Date().toLocaleDateString(),
     api: 'OpenWeather',
     cityGeoLocation: {
       lat: 0,
@@ -25,6 +26,9 @@ export const userSlice = createSlice({
     },
     changeApi(state, action: PayloadAction<string>) {
       state.api = action.payload;
+    },
+    changeDateObject(state, action: PayloadAction<string>) {
+      state.dateObject = action.payload;
     },
     changeImgNum(state, action: PayloadAction<number>) {
       state.imgNum = action.payload;

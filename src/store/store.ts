@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { calendarApi } from './reducers/CalendarApi';
 import { openWeatherApi } from './reducers/OpenWeatherApi';
 import { unsplashApi } from './reducers/UnsplashAPI';
 import userSlice from './reducers/UserSlice';
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   [openWeatherApi.reducerPath]: openWeatherApi.reducer,
   [weatherBitApi.reducerPath]: weatherBitApi.reducer,
   [unsplashApi.reducerPath]: unsplashApi.reducer,
+  [calendarApi.reducerPath]: calendarApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -38,7 +40,8 @@ export const store = configureStore({
   })
     .concat(openWeatherApi.middleware)
     .concat(weatherBitApi.middleware)
-    .concat(unsplashApi.middleware),
+    .concat(unsplashApi.middleware)
+    .concat(calendarApi.middleware),
 });
 
 export const persistor = persistStore(store);

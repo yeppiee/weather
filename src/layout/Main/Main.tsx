@@ -1,11 +1,12 @@
 import React from 'react';
 import ApiSwitcher from '../../components/ApiSwitcher';
+import CalendarList from '../../components/CalendarList';
 import styles from './Main.module.css';
 
 function Main() {
   return (
     <main className={styles.container}>
-      <div>Calendar</div>
+      <CalendarList />
       <ApiSwitcher />
     </main>
   );
