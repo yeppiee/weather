@@ -3,7 +3,7 @@
   flex-direction: column;
   list-style: none;
   font-size: 0.8em;
-  max-height: 500px;
+  max-height: 350px;
   overflow-y: auto;
 }
 
