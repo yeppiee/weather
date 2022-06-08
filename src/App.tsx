@@ -9,6 +9,7 @@ import useGeoLocation from './customHooks/useGeoLocation';
 import useWeather from './customHooks/useWeather';
 import { useGetImgQuery } from './store/reducers/UnsplashAPI';
 import useImg from './customHooks/useImg';
+import Loader from './components/Loader';
 
 function App() {
   useGeoLocation();
@@ -19,7 +20,7 @@ function App() {
   );
   useImg(images);
 
-  if (!images) return <div>Loading...</div>;
+  if (!images) return <Loader />;
   return (
     <div className={styles.container}>
       <Header images={images.results} />
